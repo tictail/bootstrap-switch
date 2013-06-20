@@ -23,6 +23,7 @@
               , classes = $element.attr('class')
               , color
               , moving
+              , stateClass
               , onLabel = "YES"
               , offLabel = "NO"
               , icon = false;
@@ -88,9 +89,8 @@
               .append($label)
               .append($switchRight);
 
-            $element.find('>div').addClass(
-              $element.find('input').is(':checked') ? 'switch-on' : 'switch-off'
-            );
+            stateClass = $element.find('input').is(':checked') ? 'switch-on' : 'switch-off';
+            $element.addClass(stateClass).find('>div').addClass(stateClass);
 
             if ($element.find('input').is(':disabled'))
               $(this).addClass('deactivate');
@@ -127,9 +127,13 @@
 
               if (state === thisState) {
 
-                if (thisState)
+                if (thisState) {
                   $element.removeClass('switch-off').addClass('switch-on');
-                else $element.removeClass('switch-on').addClass('switch-off');
+                  $element.parent().removeClass('switch-off').addClass('switch-on');
+                } else {
+                  $element.removeClass('switch-on').addClass('switch-off');
+                  $element.parent().removeClass('switch-on').addClass('switch-off');
+                }
 
                 if ($element.data('animated') !== false)
                   $element.addClass("switch-animate");
