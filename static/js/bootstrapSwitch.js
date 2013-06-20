@@ -23,8 +23,8 @@
               , classes = $element.attr('class')
               , color
               , moving
-              , onLabel = "ON"
-              , offLabel = "OFF"
+              , onLabel = "YES"
+              , offLabel = "NO"
               , icon = false;
 
             $.each(['switch-mini', 'switch-small', 'switch-large'], function (i, el) {
@@ -46,6 +46,11 @@
 
               if ($element.data('icon') !== undefined)
                 icon = $element.data('icon');
+            }
+
+            if ($element.data('on-off') !== undefined) {
+              onLabel = "ON";
+              offLabel = "OFF";
             }
 
             $switchLeft = $('<span>')
