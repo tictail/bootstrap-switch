@@ -1,0 +1,124 @@
+@switch-on-color: #38c247;
+@switch-on-color-darker: #35bc44;
+@switch-on-border-color: #34b743;
+@switch-on-border-color-darker: #31ae3f;
+
+@switch-off-color: #c2c2c2;
+@switch-off-color-darker: #c0c0c0;
+@switch-off-border-color: #bebebe;
+@switch-off-border-color-darker: #bbb;
+
+@switch-height: 35px;
+@switch-padding: 3px;
+@switch-width: 90px;
+
+@switch-large-ratio: 1.5;
+@switch-small-ratio: 0.75;
+@switch-mini-ratio: 0.5;
+
+@switch-font-size: 16px;
+
+.switch-sizing(@size-ratio: 1) {
+  @_height: @switch-height * @size-ratio;
+  @_width: @switch-width * @size-ratio;
+
+  height: @_height;
+  min-width: @_width;
+  width: @_width;
+  padding: @switch-padding;
+
+  border-radius: (@_height + @switch-padding * 2);
+
+  > div {
+    height: @_height;
+    width: @_width * 2 - @_height;
+
+    &.switch-off {
+      left: -(@_width - @_height);
+    }
+  }
+
+  label {
+    width: @_height;
+    height: @_height;
+  }
+
+  span.switch-right, span.switch-left {
+    height: @_height;
+    width: @_width - @_height;
+    font-size: @switch-font-size * @size-ratio;
+    line-height: ceil(@_height);
+  }
+}
+
+.gradient(@start-color, @end-color) {
+  background-image: -moz-linear-gradient(top, @start-color, @end-color); // FF 3.6+
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@start-color), to(@end-color)); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient(top, @start-color, @end-color); // Safari 5.1+, Chrome 10+
+  background-image: -o-linear-gradient(top, @start-color, @end-color); // Opera 11.10
+  background-image: linear-gradient(to bottom, @start-color, @end-color); // Standard, IE10
+  background-repeat: repeat-x;
+}
+
+.has-switch {
+  .switch-sizing();
+  &.switch-large { .switch-sizing(@switch-large-ratio) }
+  &.switch-small { .switch-sizing(@switch-small-ratio) }
+  &.switch-mini { .switch-sizing(@switch-mini-ratio) }
+
+  background-color: @switch-on-color;
+  // border: 1px solid;
+  border: none;
+  border-color: @switch-on-border-color;
+  border-top-color: @switch-on-border-color-darker;
+  .gradient(rgba(0,0,0,0.05), rgba(0,0,0,0));
+  // box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
+
+ .transition(~"background-color 0.5s 0.25s, border-color 0.5s 0.25s");
+  &.switch-off {
+    background-color: @switch-off-color;
+    border-color: @switch-off-border-color;
+    border-top-color: @switch-off-border-color-darker;
+  }
+
+  > div.switch-animate {
+    .transition(~"left 0.5s cubic-bezier(.80,-0.25,.20,1.25), margin 0.3s");
+  }
+
+  label {
+    border-radius: 100%;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid rgba(0,0,0,0.1);
+    #gradient > .vertical(#fff, #f5f5f5);
+  }
+
+  span.switch-right, span.switch-left {
+    vertical-align: middle;
+    background: none;
+    padding: 0;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
+    font-size: 16px;
+    text-align: center;
+    box-sizing: border-box;
+
+    &:hover {
+      background: none;
+      color: white;
+    }
+  }
+
+  &:hover label {
+    box-shadow: inset 0 0 0px 100px rgba(255,255,255,0.7);
+  }
+
+  span.switch-right {
+    padding-right: 4px;
+  }
+
+  span.switch-left {
+    padding-left: 4px;
+  }
+}
