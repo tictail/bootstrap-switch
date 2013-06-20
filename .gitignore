@@ -2,3 +2,5 @@ target/
 .idea
 .sass-cache/
 .DS_Store
+
+static/stylesheets
