@@ -13,7 +13,8 @@
     var methods = {
       init: function () {
         return this.each(function () {
-            var $element = $(this)
+            var CUSTOMIZABLE = false
+              , $element = $(this)
               , $div
               , $switchLeft
               , $switchRight
@@ -33,17 +34,19 @@
 
             $element.addClass('has-switch');
 
-            if ($element.data('on') !== undefined)
-              color = "switch-" + $element.data('on');
+            if (CUSTOMIZABLE) {
+              if ($element.data('on') !== undefined)
+                color = "switch-" + $element.data('on');
 
-            if ($element.data('on-label') !== undefined)
-              onLabel = $element.data('on-label');
+              if ($element.data('on-label') !== undefined)
+                onLabel = $element.data('on-label');
 
-            if ($element.data('off-label') !== undefined)
-              offLabel = $element.data('off-label');
+              if ($element.data('off-label') !== undefined)
+                offLabel = $element.data('off-label');
 
-            if ($element.data('icon') !== undefined)
-              icon = $element.data('icon');
+              if ($element.data('icon') !== undefined)
+                icon = $element.data('icon');
+            }
 
             $switchLeft = $('<span>')
               .addClass("switch-left")
@@ -52,7 +55,7 @@
               .html(onLabel);
 
             color = '';
-            if ($element.data('off') !== undefined)
+            if ($element.data('off') !== undefined && CUSTOMIZABLE)
               color = "switch-" + $element.data('off');
 
             $switchRight = $('<span>')
