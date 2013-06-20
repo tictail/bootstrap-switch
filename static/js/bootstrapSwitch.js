@@ -81,7 +81,7 @@
 
             $div = $element.find(':checkbox').wrap($('<div>')).parent().data('animated', false);
 
-            if ($element.data('animated') !== false)
+            if ($element.data('animated') !== false || !CUSTOMIZABLE)
               $div.addClass('switch-animate').data('animated', true);
 
             $div
@@ -135,7 +135,7 @@
                   $element.parent().removeClass('switch-on').addClass('switch-off');
                 }
 
-                if ($element.data('animated') !== false)
+                if ($element.data('animated') !== false || !CUSTOMIZABLE)
                   $element.addClass("switch-animate");
 
                 if (typeof skipOnChange === 'boolean' && skipOnChange)
