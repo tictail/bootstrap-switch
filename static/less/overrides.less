@@ -1,6 +1,6 @@
 @switch-on-color: #38c247;
 @switch-on-color-darker: #35bc44;
-@switch-on-border-color: #34b743;
+@switch-on-border-color: #34b442;
 @switch-on-border-color-darker: #31ae3f;
 
 @switch-off-color: #c2c2c2;
@@ -11,6 +11,7 @@
 @switch-height: 40px;
 @switch-padding: 3px;
 @switch-width: 90px;
+@switch-border-width: 1px;
 
 @switch-large-ratio: 1.25;
 @switch-small-ratio: 0.75;
@@ -22,8 +23,8 @@
   @_height: @switch-height * @size-ratio;
   @_width: @switch-width * @size-ratio;
   @_padding: @switch-padding;
-  @_inner-height: @_height - 2 * @_padding;
-  @_inner-width: @_width - 2 * @_padding;
+  @_inner-height: @_height - 2 * @_padding - 2 * @switch-border-width;
+  @_inner-width: @_width - 2 * @_padding - 2 * @switch-border-width;
 
   height: @_height;
   min-width: @_width;
@@ -70,12 +71,10 @@
   &.switch-mini { .switch-sizing(@switch-mini-ratio) }
 
   background-color: @switch-on-color;
-  // border: 1px solid;
-  border: none;
+  border: @switch-border-width solid;
   border-color: @switch-on-border-color;
   border-top-color: @switch-on-border-color-darker;
   .gradient(rgba(0,0,0,0.05), rgba(0,0,0,0));
-  // box-shadow: inset 0 1px 1px rgba(0,0,0,0.1);
 
  .transition(~"background-color 0.5s 0.25s, border-color 0.5s 0.25s");
   &.switch-off {
@@ -92,7 +91,8 @@
     border-radius: 100%;
     vertical-align: middle;
     background-color: #f5f5f5;
-    border: 1px solid rgba(0,0,0,0.1);
+    border: none;
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
     #gradient > .vertical(#fff, #f5f5f5);
   }
 
@@ -114,7 +114,7 @@
   }
 
   &:hover label {
-    box-shadow: inset 0 0 0px 100px rgba(255,255,255,0.7);
+    #gradient > .vertical(#fff, #fafafa);
   }
 
   span.switch-right {
