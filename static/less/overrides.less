@@ -8,11 +8,11 @@
 @switch-off-border-color: #bebebe;
 @switch-off-border-color-darker: #bbb;
 
-@switch-height: 35px;
+@switch-height: 40px;
 @switch-padding: 3px;
 @switch-width: 90px;
 
-@switch-large-ratio: 1.5;
+@switch-large-ratio: 1.25;
 @switch-small-ratio: 0.75;
 @switch-mini-ratio: 0.5;
 
@@ -21,17 +21,20 @@
 .switch-sizing(@size-ratio: 1) {
   @_height: @switch-height * @size-ratio;
   @_width: @switch-width * @size-ratio;
+  @_padding: @switch-padding;
+  @_inner-height: @_height - 2 * @_padding;
+  @_inner-width: @_width - 2 * @_padding;
 
   height: @_height;
   min-width: @_width;
   width: @_width;
-  padding: @switch-padding;
+  padding: @_padding;
 
-  border-radius: (@_height + @switch-padding * 2);
+  border-radius: @_height;
 
   > div {
-    height: @_height;
-    width: @_width * 2 - @_height;
+    height: @_inner-height;
+    width: @_inner-width * 2 - @_inner-height;
 
     &.switch-off {
       left: -(@_width - @_height);
@@ -39,15 +42,15 @@
   }
 
   label {
-    width: @_height;
-    height: @_height;
+    width: @_inner-height;
+    height: @_inner-height;
   }
 
   span.switch-right, span.switch-left {
-    height: @_height;
-    width: @_width - @_height;
+    height: @_inner-height;
+    width: @_inner-width - @_inner-height;
     font-size: @switch-font-size * @size-ratio;
-    line-height: ceil(@_height);
+    line-height: ceil(@_inner-height);
   }
 }
 
