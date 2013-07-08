@@ -34,6 +34,7 @@
             });
 
             $element.addClass('has-switch');
+            $element.attr('tabindex', 0);
 
             if (CUSTOMIZABLE) {
               if ($element.data('on') !== undefined)
