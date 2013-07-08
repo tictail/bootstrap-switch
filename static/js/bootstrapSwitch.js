@@ -34,7 +34,11 @@
             });
 
             $element.addClass('has-switch');
-            $element.attr('tabindex', 0);
+
+            // Enable tab focus only
+            $element.attr('tabindex', 0).on('mousedown', function(e) {
+              e.preventDefault();
+            });
 
             if (CUSTOMIZABLE) {
               if ($element.data('on') !== undefined)
